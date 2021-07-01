@@ -1,2 +1,2 @@
-# Lab01
-953331
+# Lab01 🍔
+The first lab ever of 953331
