@@ -12,11 +12,56 @@
 
 <body>
     <div id="app">
-        <h1>Product goes here</h1>
+        <div class="nav-bar"></div>
+        <div class="cart">Cart ({{cart}}) </div>
+        <div class="product-display">
+            <div class="product-container">
+                <div class="product-image">
+                    <img :src="image" >
+                </div>
+                <div class="product-info">
+                    <h1><a :href="url">{{product}}</a></h1>
+                    <h1 v-if="onSale">This piece is on Sale!!!</h1>
+                    <h1 v-else>Not on Sale anymore</h1>
+                    
+                    <div class="button" v-for="item in variants" :key="item.id" @mouseover="updateImage(item.image)"><h3>{{item.color}}</h3></div>
+                    <button class="button" @click="addToCart">Add to Cart</button>
+                    <button class="button" @click="updateStock">UpdateStock</button>
+
+                    <h2>Status</h2>
+                    <p v-if="inStock">In Stock</p>
+                    <p v-else>Out of Stock</p>
+
+                    <h2>Item remain</h2> 
+                    <p v-if="inventory > 10">There are enough item</p>
+                    <p v-else-if="inventory <= 10 && inventory > 0">There are a few item left</p>
+                    <p v-else>not enough item</p>
+
+                    <h2>Ingredient</h2>
+                    <ul>
+                        <li v-for="item in details">{{item}}</li>
+                    </ul>
+                    
+                    <h2>Socks color</h2>
+                    <ul>
+                        <li v-for="item in variants" :key="item.id">{{ item.color }}</li>
+                    </ul>
+
+                    <h2>Socks Size</h2>
+                    <ul>
+                        <li v-for="item in size">{{ item }}</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Import Js -->
     <script src="./main.js"></script>
+    <script>
+        const mountedApp = app.mount('#app');
+    </script>
 </body>
 
 </html>
